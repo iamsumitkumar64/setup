@@ -11,6 +11,8 @@ import { BcryptService } from './infrastructure/service/bcrypt.service';
 import { SocketModule } from './infrastructure/socket/socket.module';
 import { JwtHelperService } from './infrastructure/service/jwt.service';
 import { AuthModule } from './feature/auth/auth.module';
+import { createTransactionalDataSourceService } from './infrastructure/service/typeorm-transactional.service';
+import { DataSourceOptions } from 'typeorm';
 
 @Module({
   imports: [
@@ -18,15 +20,22 @@ import { AuthModule } from './feature/auth/auth.module';
       isGlobal: true,
     }),
 
-    TypeOrmModule.forRoot({
-      ...dataSource.options,
-      retryAttempts: Number(process.env.DB_RETRY_ATTEMPTS) || 10,
-      retryDelay: Number(process.env.DB_RETRY_DELAY) || 5000
+    TypeOrmModule.forRootAsync({
+      useFactory: () => ({
+        ...dataSource.options,
+        retryAttempts: Number(process.env.DB_RETRY_ATTEMPTS) || 10,
+        retryDelay: Number(process.env.DB_RETRY_DELAY) || 5000,
+      }),
+      dataSourceFactory: async (options) =>
+        createTransactionalDataSourceService(
+          process.env.DB_POSTGRES_HOST || 'database',
+          options as DataSourceOptions,
+        ),
     }),
 
     JwtModule.register({
       global: true,
-      secret: process.env.JWT_REGISTER_SECRET,
+      secret: process.env.JWT_REGISTER_SECRET || 'cdcwrg3',
       // signOptions: { expiresIn: '60m' },
     }),
 
