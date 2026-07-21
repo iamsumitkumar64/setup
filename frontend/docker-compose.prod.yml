@@ -1,6 +1,6 @@
-name: "setup-backend"
+name: "setup-frontend"
 
 services:
-  backend:
+  frontend:
     build:
       target: production

@@ -1,0 +1,17 @@
+name: "setup-frontend"
+
+services:
+  frontend:
+    build:
+      context: ./
+      dockerfile: dockerfile
+    ports:
+      - "3000:3000"
+    env_file: ./.env
+    networks:
+      - setup_network
+
+networks:
+  setup_network: # backend should start first to create this network
+    name: setup-backend_setup_network
+    external: true

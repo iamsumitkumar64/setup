@@ -1,4 +1,4 @@
-name: "cqrs-backend"
+name: "setup-backend"
 
 services:
   pgadmin:
@@ -12,7 +12,7 @@ services:
     volumes:
       - backend_pgadmin_data:/var/lib/pgadmin
     networks:
-      - cqrs_network
+      - setup_network
 
   database:
     image: postgres:16
@@ -24,7 +24,7 @@ services:
     volumes:
       - backend_postgres_data:/var/lib/postgresql/data
     networks:
-      - cqrs_network
+      - setup_network
 
   backend:
     build:
@@ -34,12 +34,12 @@ services:
       - "8090:8090"
     env_file: ./.env
     networks:
-      - cqrs_network
+      - setup_network
 
 volumes:
   backend_postgres_data: {}
   backend_pgadmin_data: {}
 
 networks:
-  cqrs_network:
+  setup_network:
     driver: bridge
