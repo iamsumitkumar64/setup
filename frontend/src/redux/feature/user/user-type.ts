@@ -2,8 +2,8 @@ import { UserRoleEnum } from "@/enums/user.role"
 
 export interface User {
   uid: string
-  email: string | null
-  name: string | null
+  email: string
+  name: string
   role: UserRoleEnum
 }
 
