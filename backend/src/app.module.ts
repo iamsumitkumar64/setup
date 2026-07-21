@@ -20,8 +20,8 @@ import { AuthModule } from './feature/auth/auth.module';
 
     TypeOrmModule.forRoot({
       ...dataSource.options,
-      retryAttempts: 10,
-      retryDelay: 5000
+      retryAttempts: Number(process.env.DB_RETRY_ATTEMPTS) || 10,
+      retryDelay: Number(process.env.DB_RETRY_DELAY) || 5000
     }),
 
     JwtModule.register({

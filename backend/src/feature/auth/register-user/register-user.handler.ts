@@ -15,7 +15,7 @@ export class RegisterUserHandler {
     async handle(body: RegisterDto) {
         //check if already exists using this email
         const isUserExists = await this.userRepo.findByEmail(body.email);
-        if (isUserExists.length) {
+        if (isUserExists) {
             throw new BadRequestException('User Already Exists with this Email');
         }
 

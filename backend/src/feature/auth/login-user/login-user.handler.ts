@@ -15,25 +15,25 @@ export class LoginUserHandler {
     async handle(body: LoginDto) {
         //check if already exists using this email
         const isUserExists = await this.userRepo.findByEmail(body.email);
-        if (!isUserExists.length) {
+        if (!isUserExists) {
             throw new BadRequestException('User not Exists with this Email ');
         }
 
         //matching password
-        const isValid = await this.bcryptService.verifyPassword(body.password, isUserExists[0].password);
+        const isValid = await this.bcryptService.verifyPassword(body.password, isUserExists.password);
         if (!isValid) {
             throw new BadRequestException('Mismatched email or password');
         }
 
-        const token = await this.jwtHelperService.generateJwtToken(isUserExists[0]);
+        const token = await this.jwtHelperService.generateJwtToken(isUserExists);
         return {
             message: "Logged In User",
             access_token: token,
             user: {
-                name: isUserExists[0].name,
-                email: isUserExists[0].email,
-                role: isUserExists[0].role,
-                uid: isUserExists[0].uuid,
+                name: isUserExists.name,
+                email: isUserExists.email,
+                role: isUserExists.role,
+                uid: isUserExists.uuid,
             }
         }
     }

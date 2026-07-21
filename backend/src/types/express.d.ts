@@ -1,5 +1,5 @@
 import 'express';
-import { UserEntity } from '../../domain/user/user.entity';
+import { UserEntity } from 'src/domain/user/user.entity';
 
 declare module 'express' {
     interface Request {
