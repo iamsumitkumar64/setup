@@ -83,9 +83,9 @@ export default function SignupForm() {
                         label="Role"
                         defaultValue="user"
                         {...register("role")}
-                    >//.toUpperCase()
-                        <MenuItem value="user">{UserRoleEnum.USER}</MenuItem>
-                        <MenuItem value="company">{UserRoleEnum.COMPANY}</MenuItem>
+                    >//
+                        <MenuItem value="user">{UserRoleEnum.USER.toUpperCase()}</MenuItem>
+                        <MenuItem value="company">{UserRoleEnum.COMPANY.toUpperCase()}</MenuItem>
                     </TextField>
 
                     <Box className={styles.field}>
