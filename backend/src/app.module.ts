@@ -4,7 +4,7 @@ import { AppService } from './app.service';
 import { dataSource } from './infrastructure/database/data-source';
 import { JwtModule } from '@nestjs/jwt';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UserRepository } from './infrastructure/repository/user.repo';
+import { UserRepository } from './infrastructure/repository/user.repository';
 import { AuthenticateMiddleware } from './infrastructure/middleware/authenticate.middleware';
 import { ConfigModule } from '@nestjs/config';
 import { BcryptService } from './infrastructure/service/bcrypt.service';

@@ -1,4 +1,4 @@
-import { UserRoleEnum } from "@/enums/user.role"
+import { UserRoleEnum } from "@/redux/feature/user/user-role.enum"
 import { z } from "zod"
 
 export const signupSchema = z

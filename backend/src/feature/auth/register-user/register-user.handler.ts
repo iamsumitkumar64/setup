@@ -1,8 +1,8 @@
 import { BadRequestException, Injectable } from "@nestjs/common";
-import { UserRepository } from "src/infrastructure/repository/user.repo";
+import { UserRepository } from "src/infrastructure/repository/user.repository";
 import { BcryptService } from "src/infrastructure/service/bcrypt.service";
 import { JwtHelperService } from "src/infrastructure/service/jwt.service";
-import { RegisterUserDto } from "./register.user.dto";
+import { RegisterUserDto } from "./register-user.dto";
 
 @Injectable()
 export class RegisterUserHandler {
@@ -23,7 +23,7 @@ export class RegisterUserHandler {
         body.password = await this.bcryptService.hashPassword(body.password);
 
         //register user in DB
-        const RegisteredUser = await this.userRepo.register(body);
+        const RegisteredUser = await this.userRepo.createUser(body);
 
         // generate token for accessing resources
         const token = await this.jwtHelperService.generateJwtToken(RegisteredUser);

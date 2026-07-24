@@ -5,7 +5,7 @@ import {
     WebSocketServer,
 } from '@nestjs/websockets';
 import { Server, Socket } from 'socket.io';
-import { UserRepository } from 'src/infrastructure/repository/user.repo';
+import { UserRepository } from 'src/infrastructure/repository/user.repository';
 import { Injectable } from '@nestjs/common';
 import { JwtHelperService } from '../service/jwt.service';
 

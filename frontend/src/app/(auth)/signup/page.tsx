@@ -17,7 +17,7 @@ import {
     TextField,
     Typography
 } from "@mui/material"
-import { UserRoleEnum } from "@/enums/user.role"
+import { UserRoleEnum } from "@/redux/feature/user/user-role.enum"
 import { enqueueSnackbar } from "notistack"
 
 export default function SignupForm() {
